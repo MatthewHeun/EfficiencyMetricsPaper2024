@@ -1,0 +1,830 @@
+%%
+%% Copyright 2007-2020 Elsevier Ltd
+%%
+%% This file is part of the 'Elsarticle Bundle'.
+%% ---------------------------------------------
+%%
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%%
+%% The list of all files belonging to the 'Elsarticle Bundle' is
+%% given in the file `manifest.txt'.
+%%
+
+%% Template article for Elsevier's document class `elsarticle'
+%% with numbered style bibliographic references
+%% SP 2008/03/01
+%%
+%%
+%%
+%% $Id: elsarticle-template-num.tex 190 2020-11-23 11:12:32Z rishi $
+%%
+%%
+% \documentclass[preprint,12pt]{elsarticle}
+\documentclass[review,12pt]{elsarticle}
+
+%% Use the option review to obtain double line spacing
+%% \documentclass[authoryear,preprint,review,12pt]{elsarticle}
+
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+%% \documentclass[final,1p,times]{elsarticle}
+%% \documentclass[final,1p,times,twocolumn]{elsarticle}
+%% \documentclass[final,3p,times]{elsarticle}
+%% \documentclass[final,3p,times,twocolumn]{elsarticle}
+%% \documentclass[final,5p,times]{elsarticle}
+%% \documentclass[final,5p,times,twocolumn]{elsarticle}
+
+%% For including figures, graphicx.sty has been loaded in
+%% elsarticle.cls. If you prefer to use the old commands
+%% please give \usepackage{epsfig}
+
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amssymb}
+%% The amsthm package provides extended theorem environments
+%% \usepackage{amsthm}
+
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers.
+\usepackage{lineno}
+
+
+% Author packages
+\usepackage{microtype}          % For beautiful typesetting
+\microtypesetup{expansion=false} % Per suggestion at https://tex.stackexchange.com/questions/384554/acm-conference-template-auto-expansion-is-only-possible-with-scalable-fonts to fix a problem Paul and Zeke are having.
+
+
+
+% This should be the last package loaded
+\usepackage{hyperref}
+
+
+
+
+\journal{Energy}
+
+\begin{document}
+
+\begin{frontmatter}
+
+%% Title, authors and addresses
+
+%% use the tnoteref command within \title for footnotes;
+%% use the tnotetext command for theassociated footnote;
+%% use the fnref command within \author or \address for footnotes;
+%% use the fntext command for theassociated footnote;
+%% use the corref command within \author for corresponding author footnotes;
+%% use the cortext command for theassociated footnote;
+%% use the ead command for the email address,
+%% and the form \ead[url] for the home page:
+%% \title{Title\tnoteref{label1}}
+%% \tnotetext[label1]{}
+%% \author{Name\corref{cor1}\fnref{label2}}
+%% \ead{email address}
+%% \ead[url]{home page}
+%% \fntext[label2]{}
+%% \cortext[cor1]{}
+%% \affiliation{organization={},
+%%             addressline={},
+%%             city={},
+%%             postcode={},
+%%             state={},
+%%             country={}}
+%% \fntext[label3]{}
+
+\title{Efficiency metrics:\\
+       New results from the Country-Level PFU database}
+
+%% use optional labels to link authors explicitly to addresses:
+%% \author[label1,label2]{}
+%% \affiliation[label1]{organization={},
+%%             addressline={},
+%%             city={},
+%%             postcode={},
+%%             state={},
+%%             country={}}
+%%
+%% \affiliation[label2]{organization={},
+%%             addressline={},
+%%             city={},
+%%             postcode={},
+%%             state={},
+%%             country={}}
+
+\author[leedsear]{Paul E. Brockway}
+\author[calvinengr]{Matthew Kuperus Heun}
+
+
+\affiliation[leedsear]{organization={Sustainability Research Institute, School of Earth and Environment, University of Leeds},%Department and Organization
+                       city={Leeds},
+                       postcode={LS2 9JT},
+                       country={United Kingdom}}
+
+\affiliation[calvinengr]{organization={Engineering Department, Calvin University},%Department and Organization
+                         addressline={3201 Burton St. SE},
+                         city={Grand Rapids},
+                         postcode={49546},
+                         state={Michigan},
+                         country={USA}}
+
+
+
+\begin{abstract}
+Abstract goes here.
+\end{abstract}
+
+%%Graphical abstract
+\begin{graphicalabstract}
+%\includegraphics{grabs}
+\end{graphicalabstract}
+
+%%Research highlights
+\begin{highlights}
+\item Research highlight 1
+\item Research highlight 2
+\end{highlights}
+
+\begin{keyword}
+%% keywords here, in the form: keyword \sep keyword
+
+%% PACS codes here, in the form: \PACS code \sep code
+
+%% MSC codes here, in the form: \MSC code \sep code
+%% or \MSC[2008] code \sep code (2000 is the default)
+
+\end{keyword}
+
+\end{frontmatter}
+
+\linenumbers{}
+
+
+% Commands for common math symbols
+% Without E or X attached
+\newcommand{\etapf}{\eta_{pf}}
+\newcommand{\etafu}{\eta_{fu}}
+\newcommand{\etapu}{\eta_{pu}}
+% Energy efficiencies
+\newcommand{\etaE}{\eta_E}
+\newcommand{\etapfE}{\eta_{pf,E}}
+\newcommand{\etafuE}{\eta_{fu,E}}
+\newcommand{\etapuE}{\eta_{pu,E}}
+% Exergy efficiencies
+\newcommand{\etaX}{\eta_X}
+\newcommand{\etapfX}{\eta_{pf,X}}
+\newcommand{\etafuX}{\eta_{fu,X}}
+\newcommand{\etapuX}{\eta_{pu,X}}
+
+\newcommand{\Ufeed}{\textbf{U}$_{feed}$}
+\newcommand{\Ueiou}{\textbf{U}$_{EIOU}$}
+
+\newcommand{\degC}{\textdegree{}C}
+
+
+
+<<setup-knitr, cache=FALSE, include=FALSE>>=
+library(knitr)
+
+# To update the references when compiling the pdf,
+# run the following command in the console:
+# knitr::knit2pdf("main-Brockway-iopart.Rnw")
+
+# Set default knitr options for chunks.
+opts_chunk$set(
+  # ********************************************************
+  include = TRUE,
+  echo = FALSE,
+  warning = FALSE,
+  self.contained = FALSE,
+  fig.width = 6.5,
+  fig.height = 3,
+  fig.align = "center"
+  # ********************************************************
+)
+@
+
+<<setup, include=FALSE>>=
+# Need to add "include=FALSE" in the chunk header to prevent knitrout triggering
+# when IEAtools masks Recca functions, and the build failing.
+library(dplyr)
+library(ggplot2)
+library(IEATools)
+library(MKHthemes)
+library(matsindf)
+library(PFUSetup)
+library(pins)
+library(Recca)
+library(readxl)
+library(scales)
+library(tibble)
+library(tidyr)
+library(viridis)
+
+use_cache <- TRUE
+include_R_chunks <- TRUE
+@
+
+<<GDPdata, eval=include_R_chunks>>=
+world_gdp <- read.csv(file.path("data", "WIND_01082023172054658.csv")) |>
+  dplyr::select(Country, Flow, Time, Value) |>
+  dplyr::filter(!is.na(Value)) |>
+  tidyr::pivot_wider(names_from = Flow, values_from = Value) |>
+  dplyr::rename(Year = Time,
+                GDPMER_billion = `GDP (billion USD 2015 prices and exchange rates)`,
+                GDPPPP_billion = `GDP (billion USD 2015 prices and PPPs)`)
+@
+
+
+<<Pinboard, eval=include_R_chunks>>=
+pinboard <- PFUSetup::get_abs_paths()[["pipeline_releases_folder"]] |>
+  pins::board_folder(versioned = TRUE)
+@
+
+
+<<LoadAggEtaPFU, cache=use_cache, eval=include_R_chunks>>=
+# v1.2
+agg_eta_pfu_version <- "20231024T113129Z-7a4ba"
+
+agg_eta_pfu <- pins::pin_read(board = pinboard,
+                              name = "agg_eta_pfu",
+                              version = agg_eta_pfu_version) |>
+  tidyr::pivot_longer(cols = c(EX.p, EX.f, EX.u, eta_pf, eta_fu, eta_pu),
+                      names_to = "Var.name",
+                      values_to = "Value") |>
+  dplyr::mutate(
+    Country = dplyr::case_when(
+      Country == "Asia_" ~ "Asia",
+      TRUE ~ Country
+    ),
+    Energy.type = dplyr::case_match(
+      Energy.type,
+      "E" ~ "Energy",
+      "X" ~ "Exergy"
+    ),
+    Var.name = dplyr::case_match(
+      Var.name,
+      "EX.p" ~ "Primary",
+      "EX.f" ~ "Final",
+      "EX.u" ~ "Useful",
+      "eta_pf" ~ "eta[pf]",
+      "eta_fu" ~ "eta[fu]",
+      "eta_pu" ~ "eta[pu]"
+    ),
+    IEAMW = factor(IEAMW, levels = c("IEA", "MW", "Both")),
+    Var.name = factor(Var.name, levels = c("Primary", "Final", "Useful",
+                                           "eta[pf]", "eta[fu]", "eta[pu]"))
+  )
+
+# Do this filtering once and cache to gain speed.
+agg_eta_pfu_world <- agg_eta_pfu |>
+  dplyr::filter(Country == "World")
+@
+
+<<ReadAggregationMaps>>=
+# Read the continents aggregation map
+continents_agg_map <- readxl::read_excel("data/aggregation_mapping.xlsx",
+                                         sheet = "continent_aggregation") |>
+  dplyr::rename(
+    Country = Many,
+    Continent = Few)
+# Read the sector aggregation map
+sector_agg_map <- readxl::read_excel("data/aggregation_mapping.xlsx",
+                                     sheet = "ef_sector_aggregation")
+
+# Calculate the final demand industries
+fd_sectors <- sector_agg_map$Few |>
+  unique()
+@
+
+<<GraphParams, include=FALSE, eval=include_R_chunks>>=
+# Set the size for legend text
+legend_text_size <- 8    # For reducing legend text size
+strip_text_margin <- 2.0 # For moving facet labels out of graphs
+
+orig_continent_names <- c(unique(continents_agg_map$Continent), "World")
+continent_names <- orig_continent_names |>
+  replace(which(orig_continent_names == "Asia_"), "Asia")
+
+# See colours at https://r-charts.com/colors/
+continent_colours <- c(Africa = "orange",
+                       Asia = "gray",
+                       # Bunkers = "darkgray",
+                       Europe = "darkgreen",
+                       MidEast = "cadetblue3", `Middle East` = "cadetblue3",
+                       NoAmr = "red", `North America` = "red",
+                       Oceania = "blue",
+                       SoCeAmr = "violet", `South and Central America` = "violet", `South and\nCentral America` = "violet",
+                       World = "black")
+continent_linetypes <- c(Africa = "solid",
+                         Asia = "solid",
+                         # Bunkers = "dashed",
+                         Europe = "solid",
+                         MidEast = "solid", `Middle East` = "solid",
+                         NoAmr = "solid", `North America` = "solid",
+                         Oceania = "solid",
+                         SoCeAmr = "solid", `South and Central America` = "solid", `South and\nCentral America` = "solid",
+                         World = "solid")
+continent_linewidths <- c(Africa = 0.3,
+                          Asia = 0.3,
+                          # Bunkers = 0.2,
+                          Europe = 0.3,
+                          MidEast = 0.3, `Middle East` = 0.3,
+                          NoAmr = 0.3, `North America` = 0.3,
+                          Oceania = 0.3,
+                          SoCeAmr = 0.3, `South and Central America` = 0.3, `South and\nCentral America` = 0.3,
+                          World = 0.5)
+
+sector_colours <- c(AFF = "palegreen4", `Agriculture, forestry, and fishing` = "palegreen4", `Agriculture, forestry,\nand fishing` = "palegreen4",
+                    Res = "orange4", Residential = "orange4",
+                    Ind = "orange3", Industry = "orange3",
+                    CPS = "orange", `Commercial and public services` = "orange", `Commercial and\npublic services` = "orange",
+                    Trans = "black", Transport = "black",
+                    NES = "lavenderblush4", `Final consumption not elsewhere specified` = "lavenderblush4", `Final consumption not\nelsewhere specified` = "lavenderblush4",
+                    NEU = "lavenderblush2", `Non-energy use` = "lavenderblush2",
+                    EIOU = "deepskyblue3", `Energy industry own use` = "deepskyblue3", `Energy industry\nown use` = "deepskyblue3",
+                    World = "black")
+
+primary_carrier_colours <- c(BM = "springgreen3", Biomass = "springgreen3",
+                             CCP = "black", `Coal & coal products` = "black", `Coal & coal\nproducts` = "black",
+                             OOP = "gray40", `Oil & oil products` = "gray40", `Oil & oil\nproducts` = "gray40",
+                             NG = "gray75", `Natural gas` = "gray75",
+                             BF = "gold3", Biofuels = "gold3",
+                             Elect = "yellow2", Electricity = "yellow2",
+                             Heat = "orangered",
+                             Waste = "brown")
+
+final_carrier_colours <- c(Feed = "springgreen4",
+                           Food = "springgreen2",
+                           CCP = "black", `Coal & coal products` = "black", `Coal & coal\nproducts` = "black",
+                           OOP = "gray40", `Oil & oil products` = "gray40", `Oil & oil\nproducts` = "gray40",
+                           NG = "gray75", `Natural gas` = "gray75",
+                           BF = "gold3", Biofuels = "gold3",
+                           Elect = "yellow2", Electricity = "yellow2",
+                           Heat = "orangered",
+                           Waste = "brown")
+
+primary_and_final_carrier_colours <- c(BM = "springgreen3", Biomass = "springgreen3",
+                                       Feed = "springgreen4",
+                                       Food = "springgreen2",
+                                       CCP = "black", `Coal & coal products` = "black", `Coal & coal\nproducts` = "black",
+                                       OOP = "gray40", `Oil & oil products` = "gray40", `Oil & oil\nproducts` = "gray40",
+                                       NG = "gray75", `Natural gas` = "gray75",
+                                       BF = "gold3", Biofuels = "gold3",
+                                       Elect = "yellow2", Electricity = "yellow2",
+                                       Heat = "orangered",
+                                       Waste = "brown")
+
+useful_carrier_colours <- c(AnMech = "purple1", `Animal mechanical work` = "purple1", `Animal mechanical\nwork` = "purple1",
+                            HuMech = "purple4", `Human mechanical work` = "purple4", `Human mechanical\nwork` = "purple4",
+                            MechW = "pink3", `Mechanical work` = "pink3",
+                            Prop = "pink1", Propulsion = "pink1",
+                            HPF = "ivory3", `High-pressure fluids` = "ivory3", `High-pressure\nfluids` = "ivory3",
+                            LTH = "orangered1", `Low-temperature heat` = "orangered1", `Low-temperature\nheat` = "orangered1",
+                            MTH = "orangered3", `Medium-temperature heat` = "orangered3", `Medium-temperature\nheat` = "orangered3",
+                            HTH = "orangered4", `High-temperature heat` = "orangered4", `High-temperature\nheat` = "orangered4",
+                            LTC = "deepskyblue3", `Low-temperature cooling` = "deepskyblue3", `Low-temperature\ncooling` = "deepskyblue3",
+                            IP = "palegreen4", `Information processing` = "palegreen4", `Information\nprocessing` = "palegreen4",
+                            L = "gold2", Light = "gold2")
+@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+\label{sec:intro}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Words in the introduction.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Methods}
+\label{sec:methods}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Words in methods.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Results}
+\label{sec:results}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+<<LoadAggEtaPFUWithoutNEU, include=FALSE, cache=use_cache, eval=include_R_chunks>>=
+# v1.2
+agg_eta_pfu_without_neu_version <- "20231116T124901Z-8cb08"
+
+agg_eta_pfu_without_neu <- pins::pin_read(board = pinboard,
+                                          name = "agg_eta_pfu_without_neu",
+                                          version = agg_eta_pfu_without_neu_version) |>
+  dplyr::filter(Last.stage == "Useful") |>
+  tidyr::pivot_longer(cols = c(EX.p, EX.f, EX.u, eta_pf, eta_fu, eta_pu),
+                      names_to = "Var.name",
+                      values_to = "Value") |>
+  dplyr::mutate(
+    Country = dplyr::case_when(
+      Country == "Asia_" ~ "Asia",
+      TRUE ~ Country
+    ),
+    Energy.type = dplyr::case_match(
+      Energy.type,
+      "E" ~ "Energy",
+      "X" ~ "Exergy"
+    ),
+    Var.name = dplyr::case_match(
+      Var.name,
+      "EX.p" ~ "Primary",
+      "EX.f" ~ "Final",
+      "EX.u" ~ "Useful",
+      "eta_pf" ~ "eta[pf]",
+      "eta_fu" ~ "eta[fu]",
+      "eta_pu" ~ "eta[pu]"
+    ),
+    IEAMW = factor(IEAMW, levels = c("IEA", "MW", "Both")),
+    Var.name = factor(Var.name, levels = c("Primary", "Final", "Useful",
+                                           "eta[pf]", "eta[fu]", "eta[pu]"))
+  )
+
+# Do this filtering once and cache to gain speed.
+agg_eta_pfu_without_neu_world <- agg_eta_pfu_without_neu |>
+  dplyr::filter(Country == "World")
+@
+
+
+Words in results.
+
+
+%++++++++++++++++++++++++++++++
+\subsection{Comparison to other metrics of efficiency}
+\label{sec:comparisons_other_metrics}
+%++++++++++++++++++++++++++++++
+
+There are other, economic-based measures of energy efficiency
+that are used to assess improvements in energy efficiency at a world level:
+economic intensity and economic productivity.
+Figure~\ref{fig:EnergyIntensityAndProductivity} shows world-level
+energy and exergy intensity ($I_E$ and $I_X$) and
+productivity ($\rho_E$ and $\rho_X$) of the world economy
+over time for primary, final, and useful stages.
+Energy productivity ($\rho$) is
+the inverse of energy intensity ($I$).
+
+<<EnergyIntensityAndProductivity, eval=include_R_chunks, fig.height = 5, fig.cap = "Energy and exergy intensity ($I$) and productivity ($\\rho$). Energy and exergy data include both IEA and muscle work. Non-energy uses are excluded. Economic data are world GDP from the IEA in 2015 PPP USD.">>=
+# Calculate energy intensity data
+energy_intensities_without_neu <- agg_eta_pfu_without_neu_world |>
+  dplyr::filter(Method == "PCM",
+                Year >= 1971,
+                IEAMW == "Both",
+                Chopped.mat == "None",
+                Chopped.var == "None",
+                Product.aggregation == "Specified",
+                Industry.aggregation == "Specified",
+                Var.name %in% c("Primary", "Final", "Useful")) |>
+  dplyr::mutate(
+    Value_MJ = Value * 1e6 # Convert TJ to MJ
+  ) |>
+  dplyr::left_join(world_gdp |>
+                     dplyr::select(dplyr::all_of(c("Year", "GDPPPP_billion"))) |>
+                     dplyr::mutate(
+                       GDPPPP_dollars = GDPPPP_billion * 1e9
+                     ),
+                   by = "Year") |>
+  dplyr::mutate(
+    Intensity_MJ_dollar = Value_MJ/GDPPPP_dollars
+  ) |>
+  dplyr::filter(!is.na(Intensity_MJ_dollar))
+
+# Calculate energy productivity
+energy_productivity_without_neu <- energy_intensities_without_neu |>
+  dplyr::mutate(
+    Productivity_dollar_MJ = 1 / Intensity_MJ_dollar
+  )
+
+# Graph the energy intensity data
+p_I <- energy_intensities_without_neu |>
+  ggplot2::ggplot(mapping = ggplot2::aes(x = Year,
+                                         y = Intensity_MJ_dollar,
+                                         colour = Var.name,
+                                         linetype = GrossNet)) +
+  ggplot2::geom_line() +
+  ggplot2::scale_x_continuous(breaks = c(1980, 2000, 2020), name = NULL) +
+  ggplot2::scale_y_continuous(name = "Intensity (I) [MJ/$]",
+                              limits = c(0, NA),
+                              breaks = c(0, 2, 4, 6, 8, 10)) +
+  ggplot2::facet_wrap(facets = "Energy.type") +
+  viridis::scale_color_viridis(name = NULL, direction = -1, discrete = TRUE, end = 0.7) +
+  ggplot2::scale_linetype_manual(name = NULL,
+                                 values = c(Gross = "solid", Net = "dashed")) +
+  MKHthemes::xy_theme() +
+  ggplot2::theme(legend.text = element_text(size = legend_text_size),
+                 axis.text.x = element_blank(),
+                 axis.ticks.x = element_blank())
+
+# Graph the productivity data
+p_rho <- energy_productivity_without_neu |>
+  ggplot2::ggplot(mapping = ggplot2::aes(x = Year,
+                                         y = Productivity_dollar_MJ,
+                                         colour = Var.name,
+                                         linetype = GrossNet)) +
+  ggplot2::geom_line() +
+  ggplot2::scale_x_continuous(breaks = c(1980, 2000, 2020), name = NULL) +
+  ggplot2::scale_y_continuous(name = expression("Productivity ("*rho*") [$/MJ]"),
+                              limits = c(0, NA),
+                              breaks = c(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2)) +
+  ggplot2::facet_wrap(facets = "Energy.type") +
+  ggplot2::scale_color_viridis_d(name = NULL, direction = -1, end = 0.7) +
+  ggplot2::scale_linetype_manual(name = NULL,
+                                 values = c(Gross = "solid", Net = "dashed")) +
+  MKHthemes::xy_theme() +
+  ggplot2::theme(legend.text = element_text(size = legend_text_size),
+                 strip.text.x = ggplot2::element_blank())
+
+# Combine
+ggpubr::ggarrange(p_I,
+                  p_rho,
+                  nrow = 2,
+                  common.legend = TRUE,
+                  legend = "right",
+                  align = "v")
+@
+
+
+<<CalcPercentChangeI>>=
+# Calculate % change in energy intensity from 1971 -- 2020.
+# This results will be used in the text below.
+perc_change_I_without_neu <- energy_intensities_without_neu |>
+  dplyr::mutate(
+    Value = NULL,
+    Value_MJ = NULL,
+    GDPPPP_billion = NULL,
+    GDPPPP_dollars = NULL
+  ) |>
+  dplyr::filter(Year %in% c(1971, 2020)) |>
+  tidyr::pivot_wider(names_from = Year, values_from = Intensity_MJ_dollar) |>
+  dplyr::mutate(
+    perc_change = (`2020` - `1971`) / `1971` * 100
+  )
+
+gross_useful_energy_perc_change_I_without_neu <- perc_change_I_without_neu |>
+  dplyr::filter(Var.name == "Useful", GrossNet == "Gross", Energy.type == "Energy") |>
+  magrittr::extract2("perc_change") |>
+  format(digits = 2)
+net_final_exergy_perc_change_I_without_neu <- perc_change_I_without_neu |>
+  dplyr::filter(Var.name == "Final", GrossNet == "Net", Energy.type == "Exergy") |>
+  magrittr::extract2("perc_change") |>
+  format(digits = 2)
+@
+
+The most stable intensity through time is
+useful exergy intensity ($I_{u,X}$ in GJ useful exergy/\$ GDP),
+because useful exergy has the highest (4-fold) growth (see Figure~\ref{fig:IndexedPFU}),
+which is closest to 6-fold world GDP growth across the period 1971--2020.
+Therefore, because GDP grows faster than energy growth rates,
+all energy intensities decline over the period 1971--2020,
+with the smallest reduction
+($\Sexpr{ifelse(exists("gross_useful_energy_perc_change_I_without_neu"), gross_useful_energy_perc_change_I_without_neu, "XXX")}$\%)
+observed for gross useful energy intensity ($I_{u,E,gross}$)
+and the largest reduction
+($\Sexpr{ifelse(exists("net_final_exergy_perc_change_I_without_neu"), net_final_exergy_perc_change_I_without_neu, "YYY")}$\%)
+observed for net final exergy intensity ($I_{f,X,net}$).
+
+The growth rate of energy productivity ($r_\rho$),
+measured in \%/year,
+is of particular interest,
+because $r_{\rho_{p,E}}$
+is the metric by which the UN's Sustainable Development Goal~7.3 is measured,
+specifically with indicator 7.3.1
+(``energy intensity measured in terms of primary energy and GDP'').
+SDG goal 7.3 is stated as
+``by 2030, double the global rate of improvement in energy efficiency.''
+% \citep{UNSDGs}
+
+Achieving SDG goal 7.3 would imply reducing global primary energy intensity from
+5.6~MJ/USD in 2010 to 3.4~MJ/USD in 2030
+equating to an annual average 2.5\% improvement per year.
+The improvement can be measured as annual percentage change rate
+in primary energy productivity ($r_{\rho_p}$),
+shown in Figure~\ref{fig:ProdEtaFUGrowthRate}.
+
+A point of comparison to the percentage growth rate in energy productivity
+($r_{\rho_p}$)
+is the percentage growth rate in final-to-useful thermodynamic energy efficiency
+($r_{\etafuE}$ and $r_{\etafuX}$),
+also shown in Figure~\ref{fig:ProdEtaFUGrowthRate}.
+The rate of change in final-to-useful exergy efficiency ($r_{\etafuX}$)
+shows a slow-down in efficiency gains,
+from 1.5~\%/year (1971) to around 1~\%/year in 2020.
+Interestingly, the values for thermodynamic efficiency ($r_\eta$) are
+comparable to the values for energy productivity ($r_\rho$),
+the economic-based metric for energy efficiency improvements used by
+the IEA
+% \citep{International-Energy-Agency:aa}
+and the UN
+% \citep{UNSDGs}.
+
+Although improvements in energy productivity can be only a proxy
+for thermodynamic based energy efficiency,
+it shows a close approximation to our
+long-term final-to-useful exergy efficiency ($\etafuX$) improvement trend.
+That said, the decline in efficiency improvements ($\etafuX$) through time
+contrasts with the growth of energy productivity ($r_{\rho,X}$) over time.
+
+
+<<ProdEtaFUGrowthRate, fig.height=5, eval=include_R_chunks, fig.cap="Annual percentage change ($r$) of primary energy productivity ($r_{\\rho_p}$) and final-to-useful thermodynamic efficiency ($r_{\\eta_{fu}}$). Energy and exergy are quantified as gross. Non-energy uses are excluded.">>=
+perc_change_prod_without_neu <- energy_productivity_without_neu |>
+  dplyr::filter(Product.aggregation == "Specified", Industry.aggregation == "Specified",
+                Year >= 1971) |>
+  dplyr::group_by(Country, Method, Energy.type, IEAMW, Chopped.mat, Chopped.var,
+                  Product.aggregation, Industry.aggregation, GrossNet, Var.name) |>
+  dplyr::mutate(
+    perc_change_prod = (dplyr::lead(Productivity_dollar_MJ) - Productivity_dollar_MJ) / Productivity_dollar_MJ * 100
+  ) |>
+  dplyr::filter(!is.na(perc_change_prod))
+
+perc_change_prod_for_body_of_paper_without_neu <- perc_change_prod_without_neu |>
+  dplyr::filter(IEAMW == "Both",
+                GrossNet == "Gross",
+                Var.name == "Primary") |>
+  dplyr::ungroup() |>
+  dplyr::mutate(
+    Var.name = NULL,
+    Value = NULL,
+    Value_MJ = NULL,
+    GDPPPP_billion = NULL,
+    GDPPPP_dollars = NULL,
+    Intensity_MJ_dollar = NULL,
+    Productivity_dollar_MJ = NULL
+  )
+
+perc_change_eta_without_neu <- agg_eta_pfu_without_neu_world |>
+  dplyr::filter(Product.aggregation == "Specified", Industry.aggregation == "Specified",
+                Year >= 1971) |>
+  dplyr::group_by(Country, Method, Energy.type, IEAMW, Chopped.mat, Chopped.var,
+                  Product.aggregation, Industry.aggregation, GrossNet, Var.name) |>
+  dplyr::mutate(
+    perc_change_eta = (dplyr::lead(Value) - Value) / Value * 100
+  ) |>
+  dplyr::filter(!is.na(perc_change_eta))
+
+perc_change_eta_for_body_of_paper_without_neu <- perc_change_eta_without_neu |>
+  dplyr::filter(Var.name == "eta[fu]",
+                IEAMW == "Both",
+                GrossNet == "Gross") |>
+  dplyr::ungroup() |>
+  dplyr::mutate(
+    Var.name = NULL,
+    Value = NULL
+  )
+
+perc_change_eta_prod_without_neu <- dplyr::full_join(perc_change_eta_for_body_of_paper_without_neu,
+                                                     perc_change_prod_for_body_of_paper_without_neu,
+                                                     by = c("Country", "Method", "Energy.type",
+                                                            "Year", "IEAMW", "Chopped.mat",
+                                                            "Chopped.var", "Product.aggregation",
+                                                            "Industry.aggregation", "GrossNet")) |>
+  tidyr::pivot_longer(cols = c(perc_change_eta, perc_change_prod),
+                      names_to = "Var.name",
+                      values_to = "Value") |>
+  dplyr::mutate(
+    Var.name = dplyr::case_when(
+      .data[["Var.name"]] == "perc_change_prod" ~ "r[rho[p]]",
+      .data[["Var.name"]] == "perc_change_eta" ~ "r[eta[fu]]"
+    ),
+    Var.name = factor(Var.name, levels = c("r[rho[p]]", "r[eta[fu]]"))
+  )
+
+p_prod <- ggplot2::ggplot() +
+  ggplot2::geom_hline(yintercept = 0, colour = "gray") +
+  ggplot2::geom_smooth(data = perc_change_eta_prod_without_neu |>
+                         dplyr::filter(Var.name == "r[rho[p]]"),
+                       mapping = ggplot2::aes(x = Year,
+                                              y = Value,
+                                              colour = "Colour"),
+                       method = "lm",
+                       se = FALSE,
+                       formula = y ~ x) +
+  ggplot2::geom_line(data = perc_change_eta_prod_without_neu |>
+                         dplyr::filter(Var.name == "r[rho[p]]"),
+                     mapping = ggplot2::aes(x = Year,
+                                            y = Value,
+                                            colour = "Color")) +
+  ggplot2::scale_x_continuous(breaks = c(1980, 2000, 2020), name = NULL) +
+  ggplot2::scale_y_continuous(name = NULL,
+                              breaks = c(-1, 0, 1, 2, 3, 4),
+                              limits = c(-0.7, 8)) +
+  ggplot2::scale_linetype_discrete(name = NULL) +
+  ggplot2::scale_colour_viridis_d(name = NULL, direction = -1, begin = 0.7, end = 0.7) +
+  ggplot2::facet_grid(rows = ggplot2::vars(Var.name),
+                      cols = ggplot2::vars(Energy.type),
+                      labeller = ggplot2::label_parsed) +
+  MKHthemes::xy_theme() +
+  ggplot2::theme(legend.position = "none",
+                 axis.text.x = element_blank(),
+                 axis.ticks.x = element_blank())
+
+p_eta <- ggplot2::ggplot() +
+  ggplot2::geom_hline(yintercept = 0, colour = "gray") +
+  ggplot2::geom_smooth(data = perc_change_eta_prod_without_neu |>
+                         dplyr::filter(Var.name == "r[eta[fu]]"),
+                       mapping = ggplot2::aes(x = Year,
+                                              y = Value,
+                                              colour = "Colour"),
+                       method = "lm",
+                       se = FALSE,
+                       formula = y ~ x) +
+  ggplot2::geom_line(data = perc_change_eta_prod_without_neu |>
+                         dplyr::filter(Var.name == "r[eta[fu]]"),
+                     mapping = ggplot2::aes(x = Year,
+                                            y = Value,
+                                            colour = "Colour")) +
+  ggplot2::scale_x_continuous(name = NULL,
+                              breaks = c(1980, 2000, 2020)) +
+  ggplot2::scale_y_continuous(name = NULL,
+                              breaks = c(-1, 0, 1, 2, 3, 4),
+                              limits = c(-0.7, 8)) +
+  ggplot2::scale_linetype_discrete(name = NULL) +
+  ggplot2::scale_colour_viridis_d(option = "inferno", name = NULL, direction = -1, begin = 0.425, end = 0.425) +
+  ggplot2::facet_grid(rows = ggplot2::vars(Var.name),
+                      cols = ggplot2::vars(Energy.type),
+                      labeller = ggplot2::label_parsed) +
+  MKHthemes::xy_theme() +
+  ggplot2::theme(legend.position = "none",
+                 strip.text.x = ggplot2::element_blank())
+
+ggpubr::ggarrange(p_prod,
+                  p_eta,
+                  nrow = 2,
+                  align = "v") |>
+  ggpubr::annotate_figure(left = ggpubr::text_grob("Annual percent change [%/year]", color = "gray50", rot = 90))
+@
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Discussion}
+\label{sec:discussion}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Words in discussion.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusion}
+\label{sec:conclusion}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Words in conclusion.
+
+
+
+
+
+
+
+
+
+
+%% The Appendices part is started with the command \appendix;
+%% appendix sections are then done as normal sections
+\appendix
+
+%% \section{}
+%% \label{}
+
+
+
+
+
+
+
+
+
+
+
+%% If you have bibdatabase file and want bibtex to generate the
+%% bibitems, please use
+%%
+%%  \bibliographystyle{elsarticle-num}
+%%  \bibliography{<your bibdatabase>}
+
+%% else use the following coding to input the bibitems directly in the
+%% TeX file.
+
+\begin{thebibliography}{00}
+
+%% \bibitem{label}
+%% Text of bibliographic item
+
+\bibitem{}
+
+\end{thebibliography}
+\end{document}
+\endinput
+%%
+%% End of file `elsarticle-template-num.tex'.
